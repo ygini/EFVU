@@ -7,6 +7,10 @@
 
 @interface EFVUKeychain : NSObject
 
-- (NSDictionary*)volumeUUIDsWithPasswordForService:(NSString*)service;
++ (NSDictionary*)allVolumeUUIDsWithPassword;
+
++ (void)setPassword:(NSString*)password forVolumeWithUUID:(NSUUID*)uuid;
++ (NSString*)passwordForVolumeWithUUID:(NSUUID*)uuid;
++ (void)deletePasswordForVolumeWithUUID:(NSUUID*)uuid;
 
 @end
