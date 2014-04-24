@@ -1,0 +1,3 @@
+[submodule "src/Vendors/CocoaSyslog"]
+	path = src/Vendors/CocoaSyslog
+	url = https://ygini@github.com/ygini/CocoaSyslog.git

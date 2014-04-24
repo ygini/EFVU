@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Vendors/CocoaSyslog/CocoaSyslog/CocoaSyslog.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:efvu/efvu.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ExtendedFileVaultUnlocker/ExtendedFileVaultUnlocker.xcodeproj">
+   </FileRef>
+</Workspace>

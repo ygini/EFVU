@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>64124336-F162-4F6E-BAC6-433FFC94D1B7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>EFVU</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>468726C4-DED8-4E2D-98F1-9D33153C0015</key>
+		<string>ssh://github.com/ygini/Unlock.git</string>
+		<key>D3697F33-6CDC-4E5F-A9B4-CDD9492D600A</key>
+		<string>https://github.com/ygini/CocoaSyslog.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>src/EFVU.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>468726C4-DED8-4E2D-98F1-9D33153C0015</key>
+		<string>../..</string>
+		<key>D3697F33-6CDC-4E5F-A9B4-CDD9492D600A</key>
+		<string>../Vendors/CocoaSyslog</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/ygini/Unlock.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>468726C4-DED8-4E2D-98F1-9D33153C0015</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D3697F33-6CDC-4E5F-A9B4-CDD9492D600A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CocoaSyslog</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>468726C4-DED8-4E2D-98F1-9D33153C0015</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Unlock</string>
+		</dict>
+	</array>
+</dict>
+</plist>
