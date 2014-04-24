@@ -3,6 +3,7 @@
 //  Unlock
 //
 //  Created by Justin Ridgewell on 8/5/11.
+//  Refactored by Yoann Gini on 24/4/14.
 //
 
 #import "EFVUKeychain.h"
@@ -36,7 +37,7 @@
 			password = [[NSString alloc] initWithData:[secItemInfo objectForKey:kSecValueData]
 											 encoding:NSUTF8StringEncoding];
 			
-			[volumeUUIDsWithPassword setObject:password forKey:volumeUUIDString];
+			[volumeUUIDsWithPassword setObject:password forKey:[[NSUUID alloc] initWithUUIDString:volumeUUIDString]];
 			
 		}
 		

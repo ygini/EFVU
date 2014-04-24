@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:efvuctl/efvuctl.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Vendors/CocoaSyslog/CocoaSyslog/CocoaSyslog.xcodeproj">
    </FileRef>
    <FileRef

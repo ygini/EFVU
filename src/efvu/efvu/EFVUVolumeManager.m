@@ -10,4 +10,14 @@
 
 @implementation EFVUVolumeManager
 
++ (NSArray*)volumeUUIDs
+{
+	return nil;
+}
+
++ (NSString*)mountPointForVolumeWithUUID:(NSUUID*)uuid
+{
+	return nil;
+}
+
 @end
