@@ -5,12 +5,15 @@
       location = "group:efvuctl/efvuctl.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Vendors/CocoaSyslog/CocoaSyslog/CocoaSyslog.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:efvu/efvu.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:ExtendedFileVaultUnlocker/ExtendedFileVaultUnlocker.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Vendors/CocoaSyslog/CocoaSyslog/CocoaSyslog.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Vendors/ddcli/ddcli.xcodeproj">
    </FileRef>
 </Workspace>
