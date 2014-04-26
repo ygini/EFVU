@@ -8,4 +8,4 @@
 	#import <Cocoa/Cocoa.h>
 #endif
 
-#define kEFVUKeychainService	@"com.inig-services.com.efvu"
+#define kEFVUServiceID	@"com.inig-services.com.efvu"

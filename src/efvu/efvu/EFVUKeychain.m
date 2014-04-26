@@ -95,7 +95,7 @@
 + (NSDictionary*)keychainQueryForAllItems
 {
 	return @{(id)kSecClass: (id)kSecClassGenericPassword,
-			 (id)kSecAttrService: kEFVUKeychainService,
+			 (id)kSecAttrService: kEFVUServiceID,
 			 (id)kSecMatchLimit: (id)kSecMatchLimitAll,
 			 (id)kSecReturnAttributes: (id)kCFBooleanTrue,
 			 (id)kSecReturnRef: (id)kCFBooleanTrue,
@@ -106,7 +106,7 @@
 {
 	return @{(id)kSecClass: (id)kSecClassGenericPassword,
 			 (id)kSecAttrAccount: account,
-			 (id)kSecAttrService: kEFVUKeychainService,
+			 (id)kSecAttrService: kEFVUServiceID,
 			 (id)kSecReturnAttributes: (id)kCFBooleanTrue,
 			 (id)kSecReturnRef: (id)kCFBooleanTrue,
 			 (id)kSecReturnData: (id)kCFBooleanTrue};

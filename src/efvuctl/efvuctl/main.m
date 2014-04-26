@@ -6,23 +6,18 @@
 //  Copyright (c) 2014 iNig-Services. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <EFVUCoreStorage.h>
+#import <ddcli/DDCommandLineInterface.h>
 
 int main(int argc, const char * argv[])
 {
-
-	@autoreleasepool {
-		
-		if ([EFVUCoreStorage volumeIdentifierIsAnEncryptedDisk:@"/Volumes/EFVU"]) {
-			NSLog(@"YES");
-		}
-		else {
-			NSLog(@"NO");
-		}
-
-	    
+	uid_t userid = getuid();
+	if (setuid(0) == 0) {
+		return DDCliAppRunWithDefaultClass();
 	}
-    return 0;
-}
+	else {
+		printf("Must be run as root\n");
+		return EXIT_FAILURE;
+	}
+	setuid(userid);
+    return 0;}
 

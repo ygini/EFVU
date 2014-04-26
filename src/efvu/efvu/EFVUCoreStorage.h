@@ -41,7 +41,7 @@ static NSString *kEFVUCoreStorageLVFEncryptionStatus  = @"LVF Encryption Status"
  *
  *  @return a dictionnary with all CoreStorage informations.
  */
-+ (NSDictionary*)informationForVolumeWithIdentfier:(NSString*)volumeIdentifier;
++ (NSDictionary*)informationForVolumeWithIdentfier:(NSUUID*)volumeIdentifier;
 
 /**
  *  Take a volume identifier (UUID or mount point) and check if it's an encrypted volume or not.
@@ -51,5 +51,14 @@ static NSString *kEFVUCoreStorageLVFEncryptionStatus  = @"LVF Encryption Status"
  *
  *  @return Does the volume is encrypted? YES or NO.
  */
-+ (BOOL)volumeIdentifierIsAnEncryptedDisk:(NSString*)volumeIdentifier;
++ (BOOL)volumeIdentifierIsAnEncryptedDisk:(NSUUID*)volumeIdentifier;
+
+
+/**
+ *  List all Logical Volume available (LV, not LVG or LVF)
+ *
+ *  @return A NSArray of NSUUID
+ */
++ (NSArray*)allLogicalVolume;
+
 @end

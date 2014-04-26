@@ -21,6 +21,69 @@
 
 @implementation EFVUCoreStorage
 
+#pragma mark - Private API
+
++ (NSString*)executeCoreStorageCommand:(NSString*)csCommand withArguments:(NSArray*)arguments
+{
+	NSString *csOutputString = nil;
+	NSMutableArray *csArgs = [NSMutableArray arrayWithObjects:@"cs", csCommand, nil];
+	[csArgs addObjectsFromArray:arguments];
+	
+	NSTask *csTask = [NSTask new];
+	[csTask setLaunchPath:@"/usr/sbin/diskutil"];
+	[csTask setArguments:csArgs];
+	[csTask setStandardOutput:[NSPipe pipe]];
+	[csTask launch];
+	[csTask waitUntilExit];
+	
+	
+	NSData *csOutputData = [[[csTask standardOutput] fileHandleForReading] availableData];
+	
+	if ([csOutputData length] > 0) {
+		csOutputString = [[NSString alloc] initWithData:csOutputData encoding:NSUTF8StringEncoding];
+	}
+	else {
+		[[CocoaSyslog sharedInstance] messageLevel4Warning:@"No data returned by diskutil cs %@", csCommand];
+	}
+	return csOutputString;
+}
+
++ (NSDictionary*)parseCoreStorageInfoResult:(NSString*)csInfoString
+{
+	NSMutableDictionary *volumeInformations = [NSMutableDictionary new];
+
+	if ([csInfoString length] > 0) {
+		NSMutableString *internalCsInfoString = [csInfoString mutableCopy];
+		[internalCsInfoString replaceOccurrencesOfString:kEFVUCoreStorageInfoHeader
+											  withString:@""
+												 options:NSLiteralSearch
+												   range:(NSRange){0, [kEFVUCoreStorageInfoHeader length]}];
+		
+		if ([internalCsInfoString length] > 0) {
+			NSScanner *infoScanner = [NSScanner scannerWithString:internalCsInfoString];
+			
+			NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@":\n"];
+			
+			NSString *keyString = nil, *valueString = nil;
+			
+			while (![infoScanner isAtEnd]) {
+				[infoScanner scanUpToCharactersFromSet:separatorSet intoString:&keyString];
+				[infoScanner setScanLocation:[infoScanner scanLocation]+1];
+				[infoScanner scanUpToCharactersFromSet:separatorSet intoString:&valueString];
+				[infoScanner setScanLocation:[infoScanner scanLocation]+1];
+				
+				if (keyString && valueString) {
+					[volumeInformations setObject:valueString forKey:keyString];
+					keyString = valueString = nil;
+				}
+			}
+			
+		}
+	}
+
+	return volumeInformations;
+}
+
 #pragma mark - Public API
 
 + (void)unlockVolume:(NSUUID*)uuid withPassword:(NSString*)password
@@ -33,18 +96,18 @@
 																	]];
 }
 
-+ (NSDictionary*)informationForVolumeWithIdentfier:(NSString*)volumeIdentifier
++ (NSDictionary*)informationForVolumeWithIdentfier:(NSUUID*)volumeIdentifier
 {
-	NSString *commandOutput = [self executeCoreStorageCommand:@"info" withArguments:@[volumeIdentifier]];
+	NSString *commandOutput = [self executeCoreStorageCommand:@"info" withArguments:@[[volumeIdentifier UUIDString]]];
 	
 	return [self parseCoreStorageInfoResult:commandOutput];
 }
 
-+ (BOOL)volumeIdentifierIsAnEncryptedDisk:(NSString*)volumeIdentifier
++ (BOOL)volumeIdentifierIsAnEncryptedDisk:(NSUUID*)volumeIdentifier
 {
 	if (volumeIdentifier) {
 		NSDictionary *volumeInformation = [self parseCoreStorageInfoResult:[self executeCoreStorageCommand:@"info"
-																							 withArguments:@[volumeIdentifier]]];
+																							 withArguments:@[[volumeIdentifier UUIDString]]]];
 		
 		NSString *encryptionState = [volumeInformation objectForKey:kEFVUCoreStorageLVFEncryptionType];
 		if (encryptionState) {
@@ -64,63 +127,24 @@
 	}
 }
 
-#pragma mark - Private API
-
-+ (NSString*)executeCoreStorageCommand:(NSString*)csCommand withArguments:(NSArray*)arguments
++ (NSArray*)allLogicalVolume
 {
-	NSString *csOutputString = nil;
-	NSMutableArray *csArgs = [NSMutableArray arrayWithObjects:@"cs", csCommand, nil];
-	[csArgs addObjectsFromArray:arguments];
+	NSMutableArray *finalList = [NSMutableArray new];
+	NSString *listOutput = [self executeCoreStorageCommand:@"list"
+											 withArguments:nil];
 	
-	NSTask *csTask = [NSTask new];
-	[csTask setLaunchPath:@"/usr/sbin/diskutil"];
-	[csTask setArguments:csArgs];
-	[csTask setStandardOutput:[NSPipe pipe]];
-	[csTask launch];
-	[csTask waitUntilExit];
+	NSArray *listOutputByLines = [listOutput componentsSeparatedByString:@"\n"];
 	
-
-	NSData *csOutputData = [[[csTask standardOutput] fileHandleForReading] availableData];
-	
-	if ([csOutputData length] > 0) {
-		csOutputString = [[NSString alloc] initWithData:csOutputData encoding:NSUTF8StringEncoding];
-	}
-	else {
-		[[CocoaSyslog sharedInstance] messageLevel4Warning:@"No data returned by diskutil cs %@", csCommand];
-	}
-	return csOutputString;
-}
-
-+ (NSDictionary*)parseCoreStorageInfoResult:(NSString*)csInfoString
-{
-	NSMutableDictionary *volumeInformations = [NSMutableDictionary new];
-	NSMutableString *internalCsInfoString = [csInfoString mutableCopy];
-	[internalCsInfoString replaceOccurrencesOfString:kEFVUCoreStorageInfoHeader
-										  withString:@""
-											 options:NSLiteralSearch
-											   range:(NSRange){0, [kEFVUCoreStorageInfoHeader length]}];
-	
-	if ([csInfoString length] > 0) {
-		NSScanner *infoScanner = [NSScanner scannerWithString:internalCsInfoString];
-		
-		NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@":\n"];
-		
-		NSString *keyString = nil, *valueString = nil;
-		
-		while (![infoScanner isAtEnd]) {
-			[infoScanner scanUpToCharactersFromSet:separatorSet intoString:&keyString];
-			[infoScanner setScanLocation:[infoScanner scanLocation]+1];
-			[infoScanner scanUpToCharactersFromSet:separatorSet intoString:&valueString];
-			[infoScanner setScanLocation:[infoScanner scanLocation]+1];
-			
-			if (keyString && valueString) {
-				[volumeInformations setObject:valueString forKey:keyString];
-				keyString = valueString = nil;
+	for (NSString *line in listOutputByLines) {
+		if ([line rangeOfString:@"Logical Volume"].location != NSNotFound) {
+			if ([line rangeOfString:@"Logical Volume Group"].location == NSNotFound
+				&& [line rangeOfString:@"Logical Volume Family"].location == NSNotFound) {
+				[finalList addObject:[[NSUUID alloc] initWithUUIDString:[[line componentsSeparatedByString:@" "] lastObject]]];
 			}
 		}
-
 	}
-	return volumeInformations;
+	
+	return finalList;
 }
 
 @end

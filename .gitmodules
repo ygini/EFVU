@@ -4,3 +4,6 @@
 [submodule "src/Vendors/ddcli"]
 	path = src/Vendors/ddcli
 url=git@github.com:ygini/ddcli.git
+[submodule "src/Vendors/fmdb"]
+	path = src/Vendors/fmdb
+	url = git@github.com:ccgus/fmdb.git

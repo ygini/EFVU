@@ -12,6 +12,7 @@
 		E11FA3F41909AE7400D69D5F /* efvuctl.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E11FA3F31909AE7400D69D5F /* efvuctl.1 */; };
 		E11FA3FB1909AE9200D69D5F /* libefvu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E11FA3FA1909AE9200D69D5F /* libefvu.a */; };
 		E155C835190BC36B0063BD4B /* libddcli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E155C834190BC36B0063BD4B /* libddcli.a */; };
+		E155C838190BC92F0063BD4B /* EFVUCommandLineController.m in Sources */ = {isa = PBXBuildFile; fileRef = E155C837190BC92F0063BD4B /* EFVUCommandLineController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,9 @@
 		E11FA3F31909AE7400D69D5F /* efvuctl.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = efvuctl.1; sourceTree = "<group>"; };
 		E11FA3FA1909AE9200D69D5F /* libefvu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libefvu.a; path = "../../../../../Library/Developer/Xcode/DerivedData/EFVU-ftkabsjstkcengbtytehvttgwopc/Build/Products/Debug/libefvu.a"; sourceTree = "<group>"; };
 		E155C834190BC36B0063BD4B /* libddcli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libddcli.a; path = ../Vendors/ddcli/build/Debug/libddcli.a; sourceTree = "<group>"; };
+		E155C836190BC92F0063BD4B /* EFVUCommandLineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFVUCommandLineController.h; sourceTree = "<group>"; };
+		E155C837190BC92F0063BD4B /* EFVUCommandLineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFVUCommandLineController.m; sourceTree = "<group>"; };
+		E155C83D190BFC4C0063BD4B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 		E11FA3EB1909AE7400D69D5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E155C83D190BFC4C0063BD4B /* CoreData.framework */,
 				E155C834190BC36B0063BD4B /* libddcli.a */,
 				E11FA3FA1909AE9200D69D5F /* libefvu.a */,
 				E11FA3EC1909AE7400D69D5F /* Foundation.framework */,
@@ -82,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				E11FA3EF1909AE7400D69D5F /* main.m */,
+				E155C836190BC92F0063BD4B /* EFVUCommandLineController.h */,
+				E155C837190BC92F0063BD4B /* EFVUCommandLineController.m */,
 				E11FA3F31909AE7400D69D5F /* efvuctl.1 */,
 				E11FA3F11909AE7400D69D5F /* Supporting Files */,
 			);
@@ -148,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E11FA3F01909AE7400D69D5F /* main.m in Sources */,
+				E155C838190BC92F0063BD4B /* EFVUCommandLineController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

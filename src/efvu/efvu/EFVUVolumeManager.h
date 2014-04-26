@@ -26,6 +26,24 @@
  */
 + (NSString*)mountPointForVolumeWithUUID:(NSUUID*)uuid;
 
+/**
+ *  Get the volume name for a specific FileVault 2 volume UUID
+ *
+ *  @param uuid volume UUID
+ *
+ *  @return the actual mount path for requested UUID
+ */
++ (NSString*)volumeNameForVolumeWithUUID:(NSUUID*)uuid;
+
+/**
+ *  Get the device identifier for a specific FileVault 2 volume UUID
+ *
+ *  @param uuid volume UUID
+ *
+ *  @return The device identifier for requested UUID
+ */
++ (NSString*)deviceIdentifierForVolumeWithUUID:(NSUUID*)uuid;
+
 
 /**
  *  Register the specificed UUID and password in the EFVU database.
