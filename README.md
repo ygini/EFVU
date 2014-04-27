@@ -1,82 +1,38 @@
-Unlock
+Extended FileVault Unlocker
 =========
 
-https://github.com/jridgewell/unlock
+https://github.com/ygini/Unlock
 
 
 ## Description
 
-Unlock allows the system to unlock and mount Core Storage encrypted volumes
-during boot. In other words, this allows you to log in as a user whose home
-directory is on an encrypted secondary disk without any problems.
+EFVU is a fork of the original Unlock project by Justin Ridgewell.
+The two projects allows the system to unlock and mount Core Storage encrypted volumes to make them available during the login process. 
 
+The difference between EFVU and Unlock is in the way to do it.
+
+Unlock is a simple launch deamon made to unlock all available volumes at the boot time.
+
+EFVU is a more complexe system who act as a SecurityAgentPlugins. It need to be registered as a mechanism for the authorisation right system.login.console. When a user log in, the plugin check if the home folder is located on a mount point registered in the EFVU database. If it's the case, EFVU retreive the volume password in the system keychain and unlock the volume. If the user isn't on a EFVU volume, nothing is done.
 
 ## Why?
 
-Like a many power users, I have two disks in my Macbook Pro. My startup volume
-is on a SSD and all of my home folder is on a second disk drive. Mac OS X Lion's
-FileVault 2 supports unlocking and mounting the startup volume, but doesn't
-support unlocking any other volume until a user has logged in. After encrypting
-my home drive and restarting, I was locked out of my user account and had to log
-in to and out of another user just to log in in as myself. This program solves
-that problem by unlocking Core Storage volumes (e.g., my home disk) without the
-need for another user account. Simply put, it allows me to log in like normal.
+As a system administrator, I need to keep my network simple to manage and secure.
 
+One of this option to keep it simple to manage is to install the system on a volume and keep users home folder on a other. This allow me to deploy a new image on the system volume without any change on the user home folder.
 
-## Install
+For the secure part, FileVault 2 is a really good move. But when used for full disk encryption, OS X can only decrypt the boot volume. It can't handle secondary volume.
 
-Run [this][install] in the terminal.
+If a user home folder is located on a secondary encrypted volume, you need a way to unlock the volume before the login. By login on a local session, using Unlock or EFVU.
 
-    curl https://raw.github.com/jridgewell/Unlock/master/install.sh | bash
+## Actual state
 
-- You will be asked for your login password.
-- Follow the prompts
-  * The install script will find all Core Storage encrypted volumes connected to
-	your computer (it will ignore the startup volume).
-  * It will then loop through the volumes it finds and ask you if you want to
-	unlock the volume during boot.
-	+ If you do, it will then ask for the passphrase used to unlock that volume.
-- Everything should be set up! Restart your computer and log in to test.
+EFVU is still in development at this time. The project is publicly available for contribution and debug purpose but must not be used in prodcution or on system with real data.
 
+### What's work
+* efvuctl command line tool to interact with the EFVU database
+* ExtendedFileVaultUnlocker plugin to unlock the home folder volume if needed at the login time.
 
-## Uninstall
-
-Run [this][uninstall] in the terminal (you'll be asked for your login password)
-to remove all traces from the system.
-
-    curl https://raw.github.com/jridgewell/Unlock/master/uninstall.sh | bash
-
-
-## Q&A
-
-### Does this encrypt my drive?
-No, this program only unlocks volumes during boot. You must encrypt the volumes
-yourself before using this program.
-### Where is the passphrase stored?
-The passphrase is stored in the encrypted System Keychain. Only users with administrative access to the computer will be able to retrieve the passphrase, but all user's will be able to unlock the volume (see next question).
-### I'm user A. What if user B logs in? Will my home drive be mounted?
-Yes it will. The program is not aware of who is logging in and I don't know of a
-way to make it aware other than making it a User LaunchDaemon, which won't work.
-A [pull request][pull] implementing this would be greatly appreciated.
-### Is my data really secure?
-Yes. Because the System Keychain is tied to its system, your drive can't be pulled out of the computer and unlocked using another computer. Only users of your own system will be able to unlock the volume, and even then, inbuilt security measures will prevent nonadministrative users from getting any data.
-### Will this work after updates?
-Yes, this program will continue to work even after updates. Because Apple doesn't
-delete LaunchDaemons during updates, the program will always be there to run on
-startup. And because the program uses Apple's supported APIs, the program will
-continue to work.
-### What if Apple fixes the bug?
-If Apple does fix the bug, the program will not harm nor interfere in anyway.
-Because of the way the program works, the worst case scenario is a warning
-appearing in the console logs. Run the [uninstall][uninstall] script and
-everything will go back to normal.
-
-## Problems?
-
-If you have a problem, file a [bug report][issue] or fix it and submit a [pull
-request][pull].
-
-[install]: https://raw.github.com/jridgewell/Unlock/master/install.sh
-[uninstall]: https://raw.github.com/jridgewell/Unlock/master/uninstall.sh
-[issue]: https://github.com/jridgewell/unlock/issues
-[pull]: https://github.com/jridgewell/unlock/pulls
+### Referenced problems
+* impossible to relock a unlocked volume due to a bug on diskutil
+* when a volume is locked and a user login on a other volume, he see the CSUserAgent message asking for the volume password, he can dissmiss it, but he can't dissmiss it for ever. The message come back at each login time.
