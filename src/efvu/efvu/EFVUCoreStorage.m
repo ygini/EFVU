@@ -33,10 +33,10 @@
 	[csTask setLaunchPath:@"/usr/sbin/diskutil"];
 	[csTask setArguments:csArgs];
 	[csTask setStandardOutput:[NSPipe pipe]];
+	[csTask setStandardError:[NSPipe pipe]];
 	[csTask launch];
 	[csTask waitUntilExit];
-	
-	
+		
 	NSData *csOutputData = [[[csTask standardOutput] fileHandleForReading] availableData];
 	
 	if ([csOutputData length] > 0) {
@@ -45,6 +45,13 @@
 	else {
 		[[CocoaSyslog sharedInstance] messageLevel4Warning:@"No data returned by diskutil cs %@", csCommand];
 	}
+	
+	csOutputData = [[[csTask standardError] fileHandleForReading] availableData];
+	if ([csOutputData length] > 0) {
+		NSString *errorString = [[NSString alloc] initWithData:csOutputData encoding:NSUTF8StringEncoding];
+		[[CocoaSyslog sharedInstance] messageLevel3Error:@"Error message returned by diskutil cs\n%@", errorString];
+	}
+	
 	return csOutputString;
 }
 
@@ -88,24 +95,31 @@
 
 + (void)unlockVolume:(NSUUID*)uuid withPassword:(NSString*)password
 {
-	[[CocoaSyslog sharedInstance] messageLevel5Notice:@"Unlocking volume %@", uuid];
-	
-	[self executeCoreStorageCommand:@"unlockVolume" withArguments:@[[uuid UUIDString],
-																	@"-passphrase",
-																	password
-																	]];
+	if ([uuid isKindOfClass:[NSUUID class]] && [password length] > 0) {
+		[[CocoaSyslog sharedInstance] messageLevel5Notice:@"Unlocking volume %@", [uuid UUIDString]];
+		[[CocoaSyslog sharedInstance] messageLevel7Debug:@"Unlocking volume %@ with password %@", [uuid UUIDString], password];
+		
+		[self executeCoreStorageCommand:@"unlockVolume" withArguments:@[[uuid UUIDString],
+																		@"-passphrase",
+																		password
+																		]];
+
+	}
 }
 
 + (NSDictionary*)informationForVolumeWithIdentfier:(NSUUID*)volumeIdentifier
 {
-	NSString *commandOutput = [self executeCoreStorageCommand:@"info" withArguments:@[[volumeIdentifier UUIDString]]];
-	
-	return [self parseCoreStorageInfoResult:commandOutput];
+	if ([volumeIdentifier isKindOfClass:[NSUUID class]]) {
+		NSString *commandOutput = [self executeCoreStorageCommand:@"info" withArguments:@[[volumeIdentifier UUIDString]]];
+		
+		return [self parseCoreStorageInfoResult:commandOutput];
+	}
+	return nil;
 }
 
 + (BOOL)volumeIdentifierIsAnEncryptedDisk:(NSUUID*)volumeIdentifier
 {
-	if (volumeIdentifier) {
+	if ([volumeIdentifier isKindOfClass:[NSUUID class]]) {
 		NSDictionary *volumeInformation = [self parseCoreStorageInfoResult:[self executeCoreStorageCommand:@"info"
 																							 withArguments:@[[volumeIdentifier UUIDString]]]];
 		

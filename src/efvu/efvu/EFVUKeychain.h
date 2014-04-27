@@ -22,7 +22,7 @@
  *  @param password password to register
  *  @param uuid     volume UUID
  */
-+ (void)setPassword:(NSString*)password forVolumeWithUUID:(NSUUID*)uuid;
++ (BOOL)setPassword:(NSString*)password forVolumeWithUUID:(NSUUID*)uuid;
 
 /**
  *  Retrive stored password for specific UUID in system keychain
@@ -38,6 +38,6 @@
  *
  *  @param uuid volume UUID
  */
-+ (void)deletePasswordForVolumeWithUUID:(NSUUID*)uuid;
++ (BOOL)deletePasswordForVolumeWithUUID:(NSUUID*)uuid;
 
 @end

@@ -7,11 +7,50 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E155C844190C2BB80063BD4B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E155C843190C2BB80063BD4B /* main.m */; };
+		E155C847190C2D0D0063BD4B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E155C846190C2D0D0063BD4B /* Security.framework */; };
 		E177908C1909113F00547AD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E177908B1909113F00547AD4 /* Cocoa.framework */; };
 		E17790961909114000547AD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E17790941909114000547AD4 /* InfoPlist.strings */; };
+		E1F0783A190C853200D05C6D /* efvuctl in Copy Resources */ = {isa = PBXBuildFile; fileRef = E1F07839190C852C00D05C6D /* efvuctl */; };
+		E1F0783E190C8BE100D05C6D /* libefvu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F0783D190C8BE100D05C6D /* libefvu.a */; };
+		E1F07840190C90CF00D05C6D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E1F0783F190C90CF00D05C6D /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E1F07838190C852C00D05C6D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1F07834190C852C00D05C6D /* efvuctl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E11FA3E91909AE7400D69D5F;
+			remoteInfo = efvuctl;
+		};
+		E1F0783B190C857300D05C6D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E1F07834190C852C00D05C6D /* efvuctl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E11FA3E81909AE7400D69D5F;
+			remoteInfo = efvuctl;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E1F07833190C83B300D05C6D /* Copy Resources */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				E1F0783A190C853200D05C6D /* efvuctl in Copy Resources */,
+			);
+			name = "Copy Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		E155C843190C2BB80063BD4B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E155C845190C2BC30063BD4B /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		E155C846190C2D0D0063BD4B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E17790881909113F00547AD4 /* ExtendedFileVaultUnlocker.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExtendedFileVaultUnlocker.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		E177908B1909113F00547AD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E177908E1909113F00547AD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -20,6 +59,9 @@
 		E17790931909114000547AD4 /* ExtendedFileVaultUnlocker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExtendedFileVaultUnlocker-Info.plist"; sourceTree = "<group>"; };
 		E17790951909114000547AD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E17790971909114000547AD4 /* ExtendedFileVaultUnlocker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExtendedFileVaultUnlocker-Prefix.pch"; sourceTree = "<group>"; };
+		E1F07834190C852C00D05C6D /* efvuctl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = efvuctl.xcodeproj; path = ../efvuctl/efvuctl.xcodeproj; sourceTree = "<group>"; };
+		E1F0783D190C8BE100D05C6D /* libefvu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libefvu.a; path = "../../../../../Library/Developer/Xcode/DerivedData/EFVU-ftkabsjstkcengbtytehvttgwopc/Build/Products/Debug/libefvu.a"; sourceTree = "<group>"; };
+		E1F0783F190C90CF00D05C6D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +69,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1F07840190C90CF00D05C6D /* libsqlite3.dylib in Frameworks */,
+				E1F0783E190C8BE100D05C6D /* libefvu.a in Frameworks */,
+				E155C847190C2D0D0063BD4B /* Security.framework in Frameworks */,
 				E177908C1909113F00547AD4 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -37,6 +82,7 @@
 		E177907F1909113F00547AD4 = {
 			isa = PBXGroup;
 			children = (
+				E1F07834190C852C00D05C6D /* efvuctl.xcodeproj */,
 				E17790911909113F00547AD4 /* ExtendedFileVaultUnlocker */,
 				E177908A1909113F00547AD4 /* Frameworks */,
 				E17790891909113F00547AD4 /* Products */,
@@ -54,6 +100,9 @@
 		E177908A1909113F00547AD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1F0783F190C90CF00D05C6D /* libsqlite3.dylib */,
+				E1F0783D190C8BE100D05C6D /* libefvu.a */,
+				E155C846190C2D0D0063BD4B /* Security.framework */,
 				E177908B1909113F00547AD4 /* Cocoa.framework */,
 				E177908D1909113F00547AD4 /* Other Frameworks */,
 			);
@@ -74,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				E17790921909113F00547AD4 /* Supporting Files */,
+				E155C845190C2BC30063BD4B /* main.h */,
+				E155C843190C2BB80063BD4B /* main.m */,
 			);
 			path = ExtendedFileVaultUnlocker;
 			sourceTree = "<group>";
@@ -88,6 +139,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E1F07835190C852C00D05C6D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1F07839190C852C00D05C6D /* efvuctl */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,10 +157,12 @@
 				E17790841909113F00547AD4 /* Sources */,
 				E17790851909113F00547AD4 /* Frameworks */,
 				E17790861909113F00547AD4 /* Resources */,
+				E1F07833190C83B300D05C6D /* Copy Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E1F0783C190C857300D05C6D /* PBXTargetDependency */,
 			);
 			name = ExtendedFileVaultUnlocker;
 			productName = ExtendedFileVaultUnlocker;
@@ -127,12 +188,28 @@
 			mainGroup = E177907F1909113F00547AD4;
 			productRefGroup = E17790891909113F00547AD4 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E1F07835190C852C00D05C6D /* Products */;
+					ProjectRef = E1F07834190C852C00D05C6D /* efvuctl.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E17790871909113F00547AD4 /* ExtendedFileVaultUnlocker */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E1F07839190C852C00D05C6D /* efvuctl */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = efvuctl;
+			remoteRef = E1F07838190C852C00D05C6D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E17790861909113F00547AD4 /* Resources */ = {
@@ -150,10 +227,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E155C844190C2BB80063BD4B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E1F0783C190C857300D05C6D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = efvuctl;
+			targetProxy = E1F0783B190C857300D05C6D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E17790941909114000547AD4 /* InfoPlist.strings */ = {
@@ -245,6 +331,10 @@
 				GCC_PREFIX_HEADER = "ExtendedFileVaultUnlocker/ExtendedFileVaultUnlocker-Prefix.pch";
 				INFOPLIST_FILE = "ExtendedFileVaultUnlocker/ExtendedFileVaultUnlocker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/EFVU-ftkabsjstkcengbtytehvttgwopc/Build/Products/Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -258,6 +348,10 @@
 				GCC_PREFIX_HEADER = "ExtendedFileVaultUnlocker/ExtendedFileVaultUnlocker-Prefix.pch";
 				INFOPLIST_FILE = "ExtendedFileVaultUnlocker/ExtendedFileVaultUnlocker-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/EFVU-ftkabsjstkcengbtytehvttgwopc/Build/Products/Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -282,6 +376,7 @@
 				E177909C1909114000547AD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

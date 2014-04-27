@@ -16,4 +16,7 @@
    <FileRef
       location = "group:Vendors/ddcli/ddcli.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Vendors/fmdb/fmdb.xcodeproj">
+   </FileRef>
 </Workspace>

@@ -65,9 +65,10 @@
 	return password;
 }
 
-+ (void)setPassword:(NSString*)password forVolumeWithUUID:(NSUUID*)uuid
++ (BOOL)setPassword:(NSString*)password forVolumeWithUUID:(NSUUID*)uuid
 {
 		// Always remove the old value and then, add the new one if a password is provided.
+	BOOL success = NO;
 	[self deletePasswordForVolumeWithUUID:uuid];
 	if (password) {
 		NSData* passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
@@ -77,17 +78,24 @@
 		OSStatus status = SecItemAdd((__bridge CFDictionaryRef) secItemInfo, NULL);
 		if (status != errSecSuccess) {
 			[[CocoaSyslog sharedInstance] messageLevel2Critical:@"SecItemAdd returned %d!", status];
+			success = NO;
+		}
+		else {
+			success = YES;
 		}
 	}
+	return success;
 }
 
-+ (void)deletePasswordForVolumeWithUUID:(NSUUID*)uuid
++ (BOOL)deletePasswordForVolumeWithUUID:(NSUUID*)uuid
 {
 	NSDictionary* keychainItemQuery = [self keychainQueryForItemWithAccount:[uuid UUIDString]];
 	OSStatus status = SecItemDelete((__bridge CFDictionaryRef) keychainItemQuery);
 	if (status != errSecSuccess) {
 		[[CocoaSyslog sharedInstance] messageLevel2Critical:@"SecItemDelete returned %d!", status];
+		return NO;
 	}
+	return YES;
 }
 
 #pragma mark - Internal API

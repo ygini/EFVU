@@ -10,6 +10,7 @@
 #import "EFVUCoreStorage.h"
 #include <sys/mount.h>
 #import "EFVUVolumeDatabase.h"
+#import "EFVUKeychain.h"
 
 @implementation EFVUVolumeManager
 
@@ -18,9 +19,9 @@
 	return [EFVUCoreStorage allLogicalVolume];
 }
 
-+ (NSString*)mountPointForVolumeWithUUID:(NSUUID*)uuid
++ (NSString*)currentMountPointForVolumeWithUUID:(NSUUID*)uuid
 {
-	NSString *diskIdentifier = [self deviceIdentifierForVolumeWithUUID:uuid];
+	NSString *diskIdentifier = [self currentDeviceIdentifierForVolumeWithUUID:uuid];
 	if (diskIdentifier) {
 		struct statfs *mntbufp;
 		int num_of_mnts = 0;
@@ -46,21 +47,103 @@
 	return nil;
 }
 
-+ (NSString*)volumeNameForVolumeWithUUID:(NSUUID*)uuid
++ (NSString*)currentVolumeNameForVolumeWithUUID:(NSUUID*)uuid
 {
 	NSDictionary *volumeInfos = [EFVUCoreStorage informationForVolumeWithIdentfier:uuid];
 	return [volumeInfos objectForKey:kEFVUCoreStorageVolumeName];
 }
 
-+ (NSString*)deviceIdentifierForVolumeWithUUID:(NSUUID*)uuid
++ (NSString*)currentDeviceIdentifierForVolumeWithUUID:(NSUUID*)uuid
 {
 	NSDictionary *volumeInfos = [EFVUCoreStorage informationForVolumeWithIdentfier:uuid];
 	return [volumeInfos objectForKey:kEFVUCoreStorageDeviceIdentifier];
 }
 
-+ (void)registerVolumeWithUUID:(NSUUID*)uuid andPassword:(NSString*)password
++ (BOOL)registerVolumeWithUUID:(NSUUID*)uuid andPassword:(NSString*)password
 {
+	BOOL success = [[EFVUVolumeDatabase sharedInstance] addVolumeUUID:uuid
+														forMountPoint:[self currentMountPointForVolumeWithUUID:uuid]
+															  andName:[self currentVolumeNameForVolumeWithUUID:uuid]];
+
+	if (success) {
+		success = [EFVUKeychain setPassword:password forVolumeWithUUID:uuid];
+	}
+	return success;
+}
+
++ (BOOL)forgetVolumeWithUUID:(NSUUID*)uuid
+{
+	BOOL success = [[EFVUVolumeDatabase sharedInstance] deleteVolumeWithUUID:uuid];
 	
+	if (success) {
+		success = [EFVUKeychain deletePasswordForVolumeWithUUID:uuid];
+	}
+	return success;
+}
+
++ (BOOL)unlockVolumeWithUUID:(NSUUID*)uuid
+{
+	NSString *currentMountPoint = [self currentMountPointForVolumeWithUUID:uuid];
+	
+	if ([currentMountPoint length] > 0) {
+		return YES;
+	}
+	
+	else {
+		NSString *password = [EFVUKeychain passwordForVolumeWithUUID:uuid];
+		
+		if ([password length] > 0) {
+			[EFVUCoreStorage unlockVolume:uuid withPassword:password];
+			return YES;
+		}
+		else {
+			return NO;
+		}
+	}
+}
+
++ (NSArray*)registeredVolumeUUIDs
+{
+	return [[EFVUVolumeDatabase sharedInstance] allUUIDs];
+}
+
++ (NSString*)registeredMountPointForVolumeWithUUID:(NSUUID*)uuid
+{
+	return [[EFVUVolumeDatabase sharedInstance] mountPointForVolumeUUID:uuid];
+}
+
++ (NSString*)registeredVolumeNameForVolumeWithUUID:(NSUUID*)uuid
+{
+	return [[EFVUVolumeDatabase sharedInstance] volumeNameForVolumeUUID:uuid];
+}
+
+
++ (NSUUID*)findRegisteredVolumeUUIDProvidingFolderPath:(NSString*)folderPath
+{
+	NSArray *UUIDs = [self volumeUUIDs];
+	NSString *mountPath = nil;
+	
+	for (NSUUID* uuid in UUIDs) {
+		mountPath = [self registeredMountPointForVolumeWithUUID:uuid];
+		if ([mountPath length] > 1) {
+			if ([folderPath rangeOfString:mountPath].location == 0) {
+				return uuid;
+			}
+		}
+	}
+	
+	return nil;
+}
+
++ (BOOL)hasPasswordForVolumeWithUUID:(NSUUID*)uuid
+{
+	NSString *password = [EFVUKeychain passwordForVolumeWithUUID:uuid];
+	
+	if ([password length] > 0) {
+		return YES;
+	}
+	
+	return NO;
 }
 
 @end

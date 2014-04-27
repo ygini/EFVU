@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E155C83B190BF8FB0063BD4B /* EFVUVolumeDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E155C839190BF8FB0063BD4B /* EFVUVolumeDatabase.h */; };
 		E155C83C190BF8FB0063BD4B /* EFVUVolumeDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E155C83A190BF8FB0063BD4B /* EFVUVolumeDatabase.m */; };
+		E155C840190BFCF90063BD4B /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E155C83F190BFCF90063BD4B /* libFMDB.a */; };
 		E17790AA1909119F00547AD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17790A91909119F00547AD4 /* Cocoa.framework */; };
 		E17790BB1909119F00547AD4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17790BA1909119F00547AD4 /* XCTest.framework */; };
 		E17790BC1909119F00547AD4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17790A91909119F00547AD4 /* Cocoa.framework */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		E155C839190BF8FB0063BD4B /* EFVUVolumeDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFVUVolumeDatabase.h; sourceTree = "<group>"; };
 		E155C83A190BF8FB0063BD4B /* EFVUVolumeDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFVUVolumeDatabase.m; sourceTree = "<group>"; };
+		E155C83F190BFCF90063BD4B /* libFMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFMDB.a; path = ../Vendors/fmdb/build/Debug/libFMDB.a; sourceTree = "<group>"; };
 		E17790A61909119F00547AD4 /* libefvu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libefvu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17790A91909119F00547AD4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E17790AC1909119F00547AD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,8 +55,8 @@
 		E17790D2190911D700547AD4 /* EFVUKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFVUKeychain.h; sourceTree = "<group>"; };
 		E17790D3190911D700547AD4 /* EFVUKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFVUKeychain.m; sourceTree = "<group>"; };
 		E17790D81909142100547AD4 /* libCocoaSyslog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaSyslog.a; path = ../Vendors/CocoaSyslog/CocoaSyslog/build/Debug/libCocoaSyslog.a; sourceTree = "<group>"; };
-		E17790DA1909875200547AD4 /* EFVUVolumeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFVUVolumeManager.h; sourceTree = "<group>"; };
-		E17790DB1909875200547AD4 /* EFVUVolumeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFVUVolumeManager.m; sourceTree = "<group>"; };
+		E17790DA1909875200547AD4 /* EFVUVolumeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EFVUVolumeManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E17790DB1909875200547AD4 /* EFVUVolumeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EFVUVolumeManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E155C840190BFCF90063BD4B /* libFMDB.a in Frameworks */,
 				E17790D91909142100547AD4 /* libCocoaSyslog.a in Frameworks */,
 				E17790AA1909119F00547AD4 /* Cocoa.framework in Frameworks */,
 			);
@@ -102,6 +105,7 @@
 		E17790A81909119F00547AD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E155C83F190BFCF90063BD4B /* libFMDB.a */,
 				E17790D81909142100547AD4 /* libCocoaSyslog.a */,
 				E17790A91909119F00547AD4 /* Cocoa.framework */,
 				E17790BA1909119F00547AD4 /* XCTest.framework */,
@@ -373,6 +377,8 @@
 					"$(inherited)",
 					/Volumes/Data,
 					HD/Users/yoanngini/SVN/Contrib/Unlock/src/Vendors/CocoaSyslog/CocoaSyslog/build/Debug,
+					/Volumes/Data,
+					HD/Users/yoanngini/SVN/Contrib/Unlock/src/Vendors/fmdb/build/Debug,
 				);
 				PRIVATE_HEADERS_FOLDER_PATH = /include/efvu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -389,6 +395,8 @@
 					"$(inherited)",
 					/Volumes/Data,
 					HD/Users/yoanngini/SVN/Contrib/Unlock/src/Vendors/CocoaSyslog/CocoaSyslog/build/Debug,
+					/Volumes/Data,
+					HD/Users/yoanngini/SVN/Contrib/Unlock/src/Vendors/fmdb/build/Debug,
 				);
 				PRIVATE_HEADERS_FOLDER_PATH = /include/efvu;
 				PRODUCT_NAME = "$(TARGET_NAME)";

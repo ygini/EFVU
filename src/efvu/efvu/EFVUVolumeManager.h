@@ -24,7 +24,7 @@
  *
  *  @return the actual mount path for requested UUID
  */
-+ (NSString*)mountPointForVolumeWithUUID:(NSUUID*)uuid;
++ (NSString*)currentMountPointForVolumeWithUUID:(NSUUID*)uuid;
 
 /**
  *  Get the volume name for a specific FileVault 2 volume UUID
@@ -33,7 +33,7 @@
  *
  *  @return the actual mount path for requested UUID
  */
-+ (NSString*)volumeNameForVolumeWithUUID:(NSUUID*)uuid;
++ (NSString*)currentVolumeNameForVolumeWithUUID:(NSUUID*)uuid;
 
 /**
  *  Get the device identifier for a specific FileVault 2 volume UUID
@@ -42,7 +42,7 @@
  *
  *  @return The device identifier for requested UUID
  */
-+ (NSString*)deviceIdentifierForVolumeWithUUID:(NSUUID*)uuid;
++ (NSString*)currentDeviceIdentifierForVolumeWithUUID:(NSUUID*)uuid;
 
 
 /**
@@ -52,8 +52,10 @@
  *
  *  @param uuid     volume UUID
  *  @param password volume password
+ *
+ *  @return return NO if we are unable to save password in keychain or volume information in EFVU database (check your syslog).
  */
-+ (void)registerVolumeWithUUID:(NSUUID*)uuid andPassword:(NSString*)password;
++ (BOOL)registerVolumeWithUUID:(NSUUID*)uuid andPassword:(NSString*)password;
 
 /**
  *  Remove all information (uuid, mount point and password) for specified
@@ -61,14 +63,14 @@
  *
  *  @param uuid volume UUID
  */
-+ (void)forgetVolumeWithUUID:(NSUUID*)uuid;
++ (BOOL)forgetVolumeWithUUID:(NSUUID*)uuid;
 
 /**
  *  Unlock and mount volume specified by UUID
  *
  *  @param uuid volume UUID
  */
-+ (void)unlockVolumeWithUUID:(NSUUID*)uuid;
++ (BOOL)unlockVolumeWithUUID:(NSUUID*)uuid;
 
 
 /**
@@ -87,5 +89,37 @@
  *  @return the registered mount point for specific volume
  */
 + (NSString*)registeredMountPointForVolumeWithUUID:(NSUUID*)uuid;
+
+/**
+ *  Return the registered volume name for a specific volume.
+ *  This will not return the volume name point but the registered one.
+ *
+ *  @param uuid volume UUID
+ *
+ *  @return the registered volume name for specific volume
+ */
++ (NSString*)registeredVolumeNameForVolumeWithUUID:(NSUUID*)uuid;
+
+
+/**
+ *  Look after a volume UUID from a requested path.
+ *  The system will look in the EFVUDatabase if a registered 
+ *  mount path can offer access to the requested folder
+ *  and return the corresponding UUID or nil.
+ *
+ *  @param folderPath The requested folder
+ *
+ *  @return The associated volume UUID or nil
+ */
++ (NSUUID*)findRegisteredVolumeUUIDProvidingFolderPath:(NSString*)folderPath;
+
+/**
+ *  Check if the EFVU keychain has a password for the specified volume UUID.
+ *
+ *  @param uuid Volume UUID
+ *
+ *  @return Yes or No, we have a secret for this volume
+ */
++ (BOOL)hasPasswordForVolumeWithUUID:(NSUUID*)uuid;
 
 @end

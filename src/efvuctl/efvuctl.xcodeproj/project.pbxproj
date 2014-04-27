@@ -13,6 +13,7 @@
 		E11FA3FB1909AE9200D69D5F /* libefvu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E11FA3FA1909AE9200D69D5F /* libefvu.a */; };
 		E155C835190BC36B0063BD4B /* libddcli.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E155C834190BC36B0063BD4B /* libddcli.a */; };
 		E155C838190BC92F0063BD4B /* EFVUCommandLineController.m in Sources */ = {isa = PBXBuildFile; fileRef = E155C837190BC92F0063BD4B /* EFVUCommandLineController.m */; };
+		E155C842190C09B40063BD4B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E155C841190C09B40063BD4B /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,8 +38,9 @@
 		E11FA3FA1909AE9200D69D5F /* libefvu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libefvu.a; path = "../../../../../Library/Developer/Xcode/DerivedData/EFVU-ftkabsjstkcengbtytehvttgwopc/Build/Products/Debug/libefvu.a"; sourceTree = "<group>"; };
 		E155C834190BC36B0063BD4B /* libddcli.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libddcli.a; path = ../Vendors/ddcli/build/Debug/libddcli.a; sourceTree = "<group>"; };
 		E155C836190BC92F0063BD4B /* EFVUCommandLineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EFVUCommandLineController.h; sourceTree = "<group>"; };
-		E155C837190BC92F0063BD4B /* EFVUCommandLineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EFVUCommandLineController.m; sourceTree = "<group>"; };
+		E155C837190BC92F0063BD4B /* EFVUCommandLineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EFVUCommandLineController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E155C83D190BFC4C0063BD4B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E155C841190C09B40063BD4B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E155C842190C09B40063BD4B /* libsqlite3.dylib in Frameworks */,
 				E155C835190BC36B0063BD4B /* libddcli.a in Frameworks */,
 				E11FA3FB1909AE9200D69D5F /* libefvu.a in Frameworks */,
 				E11FA3ED1909AE7400D69D5F /* Foundation.framework in Frameworks */,
@@ -75,6 +78,7 @@
 		E11FA3EB1909AE7400D69D5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E155C841190C09B40063BD4B /* libsqlite3.dylib */,
 				E155C83D190BFC4C0063BD4B /* CoreData.framework */,
 				E155C834190BC36B0063BD4B /* libddcli.a */,
 				E11FA3FA1909AE9200D69D5F /* libefvu.a */,
@@ -237,12 +241,6 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "efvuctl/efvuctl-Prefix.pch";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/EFVU-ftkabsjstkcengbtytehvttgwopc/Build/Products/Debug",
-					/Volumes/Data,
-					HD/Users/yoanngini/SVN/Contrib/Unlock/src/Vendors/ddcli/build/Debug,
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -252,12 +250,6 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "efvuctl/efvuctl-Prefix.pch";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/EFVU-ftkabsjstkcengbtytehvttgwopc/Build/Products/Debug",
-					/Volumes/Data,
-					HD/Users/yoanngini/SVN/Contrib/Unlock/src/Vendors/ddcli/build/Debug,
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

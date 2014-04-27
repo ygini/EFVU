@@ -18,12 +18,14 @@
  */
 + (instancetype)sharedInstance;
 
-- (void)addVolumeUUID:(NSUUID*)uuid forMountPoint:(NSString*)mountPoint;
+- (BOOL)addVolumeUUID:(NSUUID*)uuid forMountPoint:(NSString*)mountPoint andName:(NSString*)name;
 
 - (NSString*)mountPointForVolumeUUID:(NSUUID*)uuid;
+- (NSString*)volumeNameForVolumeUUID:(NSUUID*)uuid;
 - (NSUUID*)UUIDForMountPoint:(NSString*)mountPoint;
 
-- (void)deleteVolumeWithUUID:(NSUUID*)uuid;
-- (void)deleteVolumeWithMountPoint:(NSString*)mountPoint;
+- (BOOL)deleteVolumeWithUUID:(NSUUID*)uuid;
+
+- (NSArray*)allUUIDs;
 
 @end
