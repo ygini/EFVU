@@ -1,7 +1,7 @@
 Extended FileVault Unlocker
 =========
 
-https://github.com/ygini/Unlock
+https://github.com/ygini/EFVU
 
 
 ## Description
